@@ -5,6 +5,7 @@ import Login from './app/login/Login';
 import Dashboard from './app/dashboard/Dashboard';
 import Register from './app/register/Register';
 import AddKey from './app/add-key/AddKey';
+import DeleteKey from './app/delete-key/DeleteKey';
 
 function NotFound() {
   return <div style={{ padding: 24 }}>404 - Not Found</div>;
@@ -33,7 +34,8 @@ const publicRoutes = [
 const allRoutes = [
   ...publicRoutes,
   { path: '/dashboard', element: <Dashboard /> },
-  { path: '/add-key', element: <AddKey /> }
+  { path: '/add-key', element: <AddKey /> },
+  { path: '/delete-key', element: <DeleteKey /> }
   // Add more if needed
 ];
 

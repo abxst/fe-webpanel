@@ -7,9 +7,11 @@ export default function AddKey() {
   const [length, setLength] = useState(7);
   const [keys, setKeys] = useState([]);
   const [generated, setGenerated] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     try {
       const data = await apiFetch('https://api.hainth.edu.vn/add-key', {
         method: 'POST',
@@ -19,6 +21,8 @@ export default function AddKey() {
       setGenerated(data.generated);
     } catch (error) {
       alert('Lỗi khi tạo key.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,9 +52,21 @@ export default function AddKey() {
             style={{ marginLeft: '8px', padding: '4px', border: '1px solid #ffffff', background: '#000000', color: '#ffffff' }}
           />
         </label>
-        <button type="submit" style={{ background: '#ffffff', color: '#000000', border: '1px solid #ffffff', padding: '8px 16px', cursor: 'pointer' }}>
-          Tạo Key
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            background: loading ? '#cccccc' : '#ffffff',
+            color: '#000000',
+            border: '1px solid #ffffff',
+            padding: '8px 16px',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.5 : 1
+          }}
+        >
+          {loading ? 'Đang tạo...' : 'Tạo Key'}
         </button>
+        {loading && <p style={{ color: '#ffffff' }}>Vui lòng đợi...</p>}
       </form>
       {generated !== null && (
         <p style={{ color: '#ffffff' }}>Đã tạo {generated} key.</p>
