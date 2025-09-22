@@ -59,11 +59,17 @@ export default function AddKey() {
         <div>
           <h2 style={{ color: '#ffffff' }}>Danh sách Key</h2>
           <ul style={{ listStyle: 'none', padding: 0 }}>
-            {keys.map((key, index) => (
-              <li key={index} style={{ marginBottom: '8px', color: '#ffffff' }}>
-                Key: {key.key}, Length: {key.length}, Prefix: {key.prefix}, Time Start: {key.time_start || 'N/A'}, Time End: {key.time_end || 'N/A'}
-              </li>
-            ))}
+              {keys.map((key, index) => (
+                <li key={index} style={{ marginBottom: '8px', color: '#ffffff' }}>
+                  List key đã tạo:<br/>{key.key}
+                  <button
+                    onClick={() => navigator.clipboard.writeText(key.key)}
+                    style={{ marginLeft: '8px', background: '#ffffff', color: '#000000', border: '1px solid #ffffff', padding: '4px 8px', cursor: 'pointer' }}
+                  >
+                    Copy
+                  </button>
+                </li>
+              ))}
           </ul>
         </div>
       )}
