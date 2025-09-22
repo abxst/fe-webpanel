@@ -5,7 +5,33 @@ export default function Dashboard() {
   const [page, setPage] = useState(1);
   const [pageSize] = useState(50);
   const [totalPages, setTotalPages] = useState(1); // Assuming we can derive this; adjust based on API response
+  const [userInfo, setUserInfo] = useState(null); // New state for user info
 
+  // Fetch user info on mount
+  useEffect(() => {
+    fetch('https://api.hainth.edu.vn/get-info', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch user info');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setUserInfo(data); // data is { status, data: [ { id, username, prefix, last_login } ] }
+      })
+      .catch(error => {
+        console.error('Error fetching user info:', error);
+        alert('Lỗi khi tải thông tin người dùng.');
+      });
+  }, []);
+
+  // Existing fetch for keys
   useEffect(() => {
     fetch(`https://api.hainth.edu.vn/get-key`, {
       method: 'GET',
@@ -36,6 +62,22 @@ export default function Dashboard() {
     <div style={{ padding: 24 }}>
       <h1>Dashboard</h1>
       <p>Welcome to the dashboard! This is a protected page.</p>
+      
+      {userInfo && userInfo.status === 'ok' && userInfo.data.length > 0 ? (
+        <div>
+          <h2>Thông tin người dùng</h2>
+          {userInfo.data.map(user => (
+            <div key={user.id}>
+              <p>ID: {user.id}</p>
+              <p>Tên đăng nhập: {user.username}</p>
+              <p>Prefix: {user.prefix}</p>
+              <p>Last Login: {user.last_login || 'Chưa có'}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>Đang tải thông tin người dùng...</p>
+      )}
       
       <h2>Danh sách Key</h2>
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>

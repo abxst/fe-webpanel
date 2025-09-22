@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import App from './App';
 import Login from './app/login/Login';
 import Dashboard from './app/dashboard/Dashboard';
+import Register from './app/register/Register';
 
 function NotFound() {
   return <div style={{ padding: 24 }}>404 - Not Found</div>;
@@ -22,7 +23,8 @@ function RequireAuth({ children }) {
 
 const publicRoutes = [
   { path: '/', element: <App /> },
-  { path: '/login', element: <LoginPage /> }
+  { path: '/login', element: <LoginPage /> },
+  { path: '/register', element: <Register /> }
 ];
 
 // Add protected routes here when needed
