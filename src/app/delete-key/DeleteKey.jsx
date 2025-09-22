@@ -16,7 +16,11 @@ export default function DeleteKey() {
         method: 'POST',
         body: JSON.stringify({ key }),
       });
-      setMessage('Key đã được xóa thành công.');
+      if (data.status === 'ok') {
+        setMessage('Key đã được xóa thành công.');
+      } else {
+        setMessage('Xóa key thất bại.');
+      }
     } catch (error) {
       setMessage('Lỗi khi xóa key.');
     } finally {
