@@ -14,6 +14,7 @@ export default function Login() {
 
     fetch('https://api.hainth.edu.vn/login', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },

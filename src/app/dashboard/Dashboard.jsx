@@ -9,6 +9,7 @@ export default function Dashboard() {
   useEffect(() => {
     fetch(`https://api.hainth.edu.vn/get-key`, {
       method: 'GET',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
