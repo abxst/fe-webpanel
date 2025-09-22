@@ -12,7 +12,7 @@ export default function DeleteKey() {
     setLoading(true);
     setMessage('');
     try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      //const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
       const data = await apiFetch('/delete-key', {
         method: 'POST',
         body: JSON.stringify({ key }),

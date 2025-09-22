@@ -8,8 +8,8 @@ export default function Sidebar({ isOpen, onToggle }) {
 
   const handleLogout = async () => {
     try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-      await apiFetch(BACKEND_URL + '/logout', { method: 'POST' });
+      //const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      await apiFetch('/logout', { method: 'POST' });
     } catch (error) {
       console.error('Logout error:', error);
     } finally {
