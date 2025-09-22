@@ -47,7 +47,7 @@ export default function Dashboard() {
               <p>ID: {user.id}</p>
               <p>Tên đăng nhập: {user.username}</p>
               <p>Prefix: {user.prefix}</p>
-              <p>Last Login: {user.last_login || 'Chưa có'} (UTC)</p>
+              <p>Last Login: {user.last_login || 'Chưa có'}</p>
             </div>
           ))}
         </div>
