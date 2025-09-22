@@ -13,7 +13,8 @@ export default function Login() {
     const username = formData.get('username');
     const password = formData.get('password');
 
-    fetch('https://api.hainth.edu.vn/login', {
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+    fetch(`${BACKEND_URL}/login`, {
       method: 'POST',
       credentials: 'include',
       headers: {

@@ -13,7 +13,8 @@ export default function AddKey() {
     event.preventDefault();
     setLoading(true);
     try {
-      const data = await apiFetch('https://api.hainth.edu.vn/add-key', {
+      //const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const data = await apiFetch('/add-key', {
         method: 'POST',
         body: JSON.stringify({ amount: parseInt(amount), length: parseInt(length) }),
       });

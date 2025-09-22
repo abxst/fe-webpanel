@@ -1,6 +1,8 @@
 export async function apiFetch(url, options = {}) {
-  const response = await fetch(url, { 
-    ...options, 
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+  const fullUrl = url.startsWith('http') ? url : `${BACKEND_URL}${url}`;
+  const response = await fetch(fullUrl, {
+    ...options,
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',

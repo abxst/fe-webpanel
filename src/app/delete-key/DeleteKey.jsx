@@ -12,7 +12,8 @@ export default function DeleteKey() {
     setLoading(true);
     setMessage('');
     try {
-      const data = await apiFetch('https://api.hainth.edu.vn/delete-key', {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const data = await apiFetch('/delete-key', {
         method: 'POST',
         body: JSON.stringify({ key }),
       });

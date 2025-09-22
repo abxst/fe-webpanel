@@ -14,7 +14,8 @@ export default function Register() {
     const prefix = formData.get('prefix');
     const password = formData.get('password');
 
-    fetch('https://api.hainth.edu.vn/register', {
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+    fetch(`${BACKEND_URL}/register`, {
       method: 'POST',
       credentials: 'include',
       headers: {

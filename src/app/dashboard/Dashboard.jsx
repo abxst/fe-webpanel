@@ -11,7 +11,7 @@ export default function Dashboard() {
 
   // Fetch user info on mount
   useEffect(() => {
-    apiFetch('https://api.hainth.edu.vn/get-info', { method: 'GET' })
+    apiFetch('/get-info', { method: 'GET' })
       .then(data => {
         setUserInfo(data);
       })
@@ -23,7 +23,7 @@ export default function Dashboard() {
 
   // Existing fetch for keys
   useEffect(() => {
-    apiFetch('https://api.hainth.edu.vn/get-key?page=' + page + '&pageSize=' + pageSize, { method: 'GET' })
+    apiFetch(`/get-key?page=${page}&pageSize=${pageSize}`, { method: 'GET' })
       .then(data => {
         setKeys(data.data);
         // Assuming API returns total count or pages; here we mock totalPages for demo
