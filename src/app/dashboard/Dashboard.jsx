@@ -61,6 +61,7 @@ export default function Dashboard() {
           <tr>
             <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>ID</th>
             <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>Key</th>
+            <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>Device ID</th>
             <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>Time Start</th>
             <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>Time End</th>
             <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>Length</th>
@@ -72,8 +73,9 @@ export default function Dashboard() {
             <tr key={key.id_key}>
               <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.id_key}</td>
               <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.key}</td>
-              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.time_start || 'N/A'}</td>
-              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.time_end || 'N/A'}</td>
+              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.id_device || 'NULL'}</td>
+              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.time_start || 'NULL'}</td>
+              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.time_end || 'NULL'}</td>
               <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.length}</td>
               <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.prefix}</td>
             </tr>
