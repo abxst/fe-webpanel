@@ -59,8 +59,7 @@ export default function Sidebar({ isOpen, onToggle }) {
         <li style={{ marginBottom: '8px' }}>
           <button
             onClick={handleLogout}
-            style={{ display: 'block', width: '100%', textAlign: 'left', padding: '8px 12px', background: '#000000', color: '#ffffff', border: '1px solid #ffffff', borderRadius: '4px', cursor: 'pointer' }}
-          >
+            style={{ display: 'block', padding: '8px 12px', background: location.pathname === '/delete-key' ? '#ffffff' : '#000000', color: location.pathname === '/delete-key' ? '#000000' : '#ffffff', border: '1px solid #ffffff', borderRadius: '4px', textDecoration: 'none', cursor: 'pointer' }}>
             Logout
           </button>
         </li>
