@@ -1,8 +1,20 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { apiFetch } from '../../utils/api';
 
 export default function Sidebar({ isOpen, onToggle }) {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await apiFetch('https://api.hainth.edu.vn/logout', { method: 'POST' });
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      navigate('/login');
+    }
+  };
 
   return (
     <div
@@ -42,6 +54,14 @@ export default function Sidebar({ isOpen, onToggle }) {
           <Link to="/delete-key" style={{ display: 'block', padding: '8px 12px', background: location.pathname === '/delete-key' ? '#ffffff' : '#000000', color: location.pathname === '/delete-key' ? '#000000' : '#ffffff', border: '1px solid #ffffff', borderRadius: '4px', textDecoration: 'none', cursor: 'pointer' }}>
             Delete key
           </Link>
+        </li>
+        <li style={{ marginBottom: '8px' }}>
+          <button
+            onClick={handleLogout}
+            style={{ display: 'block', width: '100%', textAlign: 'left', padding: '8px 12px', background: '#000000', color: '#ffffff', border: '1px solid #ffffff', borderRadius: '4px', cursor: 'pointer' }}
+          >
+            Logout
+          </button>
         </li>
       </ul>
     </div>
