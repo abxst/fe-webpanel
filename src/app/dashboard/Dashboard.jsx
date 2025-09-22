@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Layout from '../layout/Layout';
+import { apiFetch } from '../../utils/api';
 
 export default function Dashboard() {
   const [keys, setKeys] = useState([]);
@@ -9,21 +11,9 @@ export default function Dashboard() {
 
   // Fetch user info on mount
   useEffect(() => {
-    fetch('https://api.hainth.edu.vn/get-info', {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch user info');
-        }
-        return response.json();
-      })
+    apiFetch('https://api.hainth.edu.vn/get-info', { method: 'GET' })
       .then(data => {
-        setUserInfo(data); // data is { status, data: [ { id, username, prefix, last_login } ] }
+        setUserInfo(data);
       })
       .catch(error => {
         console.error('Error fetching user info:', error);
@@ -33,19 +23,7 @@ export default function Dashboard() {
 
   // Existing fetch for keys
   useEffect(() => {
-    fetch(`https://api.hainth.edu.vn/get-key`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch keys');
-        }
-        return response.json();
-      })
+    apiFetch('https://api.hainth.edu.vn/get-key', { method: 'GET' })
       .then(data => {
         setKeys(data.data);
         // Assuming API returns total count or pages; here we mock totalPages for demo
@@ -59,15 +37,13 @@ export default function Dashboard() {
   }, [page, pageSize]);
 
   return (
-    <div style={{ padding: 24 }}>
-      <h1>Dashboard</h1>
-      <p>Welcome to the dashboard! This is a protected page.</p>
+    <Layout>
       
       {userInfo && userInfo.status === 'ok' && userInfo.data.length > 0 ? (
-        <div>
+        <div style={{ color: '#ffffff' }}>
           <h2>Thông tin người dùng</h2>
           {userInfo.data.map(user => (
-            <div key={user.id}>
+            <div key={user.id} style={{ marginBottom: '16px' }}>
               <p>ID: {user.id}</p>
               <p>Tên đăng nhập: {user.username}</p>
               <p>Prefix: {user.prefix}</p>
@@ -76,40 +52,40 @@ export default function Dashboard() {
           ))}
         </div>
       ) : (
-        <p>Đang tải thông tin người dùng...</p>
+        <p style={{ color: '#ffffff' }}>Đang tải thông tin người dùng...</p>
       )}
       
-      <h2>Danh sách Key</h2>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <h2 style={{ color: '#ffffff' }}>Danh sách Key</h2>
+      <table style={{ width: '100%', borderCollapse: 'collapse', color: '#ffffff' }}>
         <thead>
           <tr>
-            <th style={{ border: '1px solid #ddd', padding: 8 }}>ID</th>
-            <th style={{ border: '1px solid #ddd', padding: 8 }}>Key</th>
-            <th style={{ border: '1px solid #ddd', padding: 8 }}>Time Start</th>
-            <th style={{ border: '1px solid #ddd', padding: 8 }}>Time End</th>
-            <th style={{ border: '1px solid #ddd', padding: 8 }}>Length</th>
-            <th style={{ border: '1px solid #ddd', padding: 8 }}>Prefix</th>
+            <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>ID</th>
+            <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>Key</th>
+            <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>Time Start</th>
+            <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>Time End</th>
+            <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>Length</th>
+            <th style={{ border: '1px solid #ffffff', padding: 8, background: '#111111' }}>Prefix</th>
           </tr>
         </thead>
         <tbody>
           {keys.map(key => (
             <tr key={key.id_key}>
-              <td style={{ border: '1px solid #ddd', padding: 8 }}>{key.id_key}</td>
-              <td style={{ border: '1px solid #ddd', padding: 8 }}>{key.key}</td>
-              <td style={{ border: '1px solid #ddd', padding: 8 }}>{key.time_start || 'N/A'}</td>
-              <td style={{ border: '1px solid #ddd', padding: 8 }}>{key.time_end || 'N/A'}</td>
-              <td style={{ border: '1px solid #ddd', padding: 8 }}>{key.length}</td>
-              <td style={{ border: '1px solid #ddd', padding: 8 }}>{key.prefix}</td>
+              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.id_key}</td>
+              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.key}</td>
+              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.time_start || 'N/A'}</td>
+              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.time_end || 'N/A'}</td>
+              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.length}</td>
+              <td style={{ border: '1px solid #ffffff', padding: 8 }}>{key.prefix}</td>
             </tr>
           ))}
         </tbody>
       </table>
       
-      <div style={{ marginTop: 16 }}>
+      <div style={{ marginTop: 16, color: '#ffffff' }}>
         <button 
           onClick={() => setPage(p => Math.max(1, p - 1))} 
           disabled={page === 1}
-          style={{ marginRight: 8 }}
+          style={{ marginRight: 8, background: '#ffffff', color: '#000000', border: '1px solid #ffffff', padding: '8px 12px', borderRadius: '4px', cursor: 'pointer' }}
         >
           Trang trước
         </button>
@@ -117,11 +93,11 @@ export default function Dashboard() {
         <button 
           onClick={() => setPage(p => Math.min(totalPages, p + 1))} 
           disabled={page === totalPages}
-          style={{ marginLeft: 8 }}
+          style={{ marginLeft: 8, background: '#ffffff', color: '#000000', border: '1px solid #ffffff', padding: '8px 12px', borderRadius: '4px', cursor: 'pointer' }}
         >
           Trang sau
         </button>
       </div>
-    </div>
+    </Layout>
   );
 }

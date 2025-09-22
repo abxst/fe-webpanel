@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../../index.css'; // Import global CSS for consistency
 import './Login.css';
 
 export default function Login() {
