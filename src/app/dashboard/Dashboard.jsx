@@ -23,7 +23,7 @@ export default function Dashboard() {
 
   // Existing fetch for keys
   useEffect(() => {
-    apiFetch('https://api.hainth.edu.vn/get-key', { method: 'GET' })
+    apiFetch('https://api.hainth.edu.vn/get-key?page=' + page + '&pageSize=' + pageSize, { method: 'GET' })
       .then(data => {
         setKeys(data.data);
         // Assuming API returns total count or pages; here we mock totalPages for demo
