@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './app/login/Login';
 import Dashboard from './app/dashboard/Dashboard';
 import Register from './app/register/Register';
+import AddKey from './app/add-key/AddKey';
 
 function NotFound() {
   return <div style={{ padding: 24 }}>404 - Not Found</div>;
@@ -31,7 +32,8 @@ const publicRoutes = [
 // Add previously private routes here without protection
 const allRoutes = [
   ...publicRoutes,
-  { path: '/dashboard', element: <Dashboard /> }
+  { path: '/dashboard', element: <Dashboard /> },
+  { path: '/add-key', element: <AddKey /> }
   // Add more if needed
 ];
 
