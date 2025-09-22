@@ -43,7 +43,7 @@ export default function AddKey() {
           />
         </label>
         <label style={{ display: 'block', marginBottom: '16px', color: '#ffffff' }}>
-          Độ dài:
+          Thời gian:
           <input
             type="number"
             value={length}
