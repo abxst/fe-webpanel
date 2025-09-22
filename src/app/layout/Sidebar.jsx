@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Sidebar() {
   return (
-    <div style={{ width: '200px', background: '#000000', padding: '16px', borderRight: '1px solid #ffffff', color: '#ffffff' }}>
+    <div className="sidebar" style={{ width: '200px', background: '#000000', padding: '16px', borderRight: '1px solid #ffffff', color: '#ffffff' }}>
       <h3 style={{ margin: 0, marginBottom: '16px', fontWeight: 600 }}>Menu</h3>
       <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
         <li style={{ marginBottom: '8px' }}>

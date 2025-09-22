@@ -5,9 +5,40 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #000000; /* Ensure global black background */
+  color: #ffffff;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 768px) {
+  /* Target the layout container - assuming it has a class or adjust as needed */
+  .app-layout { /* Add this class to the outer div in Layout.jsx if needed */
+    flex-direction: column !important;
+  }
+  
+  .sidebar { /* Add class to Sidebar component */
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid #ffffff;
+  }
+  
+  /* Make menu horizontal on mobile */
+  .sidebar ul {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .sidebar li {
+    margin-bottom: 0 !important;
+    flex: 1;
+  }
+  
+  .sidebar button {
+    border-radius: 0 !important;
+  }
 }
