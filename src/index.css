@@ -14,31 +14,19 @@ code {
     monospace;
 }
 
-/* Responsive layout for mobile */
+/* Responsive styles for mobile */
 @media (max-width: 768px) {
-  /* Target the layout container - assuming it has a class or adjust as needed */
-  .app-layout { /* Add this class to the outer div in Layout.jsx if needed */
-    flex-direction: column !important;
+  .mobile-toggle {
+    display: block !important;
   }
-  
-  .sidebar { /* Add class to Sidebar component */
-    width: 100% !important;
-    border-right: none !important;
-    border-bottom: 1px solid #ffffff;
+
+  .close-btn {
+    display: block !important;
   }
-  
-  /* Make menu horizontal on mobile */
-  .sidebar ul {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .sidebar li {
-    margin-bottom: 0 !important;
-    flex: 1;
-  }
-  
-  .sidebar button {
-    border-radius: 0 !important;
+
+  .sidebar {
+    position: absolute !important;
+    z-index: 1000;
+    height: 100vh;
   }
 }
