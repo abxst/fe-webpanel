@@ -58,16 +58,19 @@ export default function AddKey() {
       {keys.length > 0 && (
         <div>
           <h2 style={{ color: '#ffffff' }}>Danh sách Key</h2>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(keys.map(k => k.key).join('\n'));
+              alert(`Đã copy ${keys.length} key`);
+            }}
+            style={{ marginBottom: '16px', background: '#ffffff', color: '#000000', border: '1px solid #ffffff', padding: '8px 16px', cursor: 'pointer' }}
+          >
+            Copy All Keys
+          </button>
           <ul style={{ listStyle: 'none', padding: 0 }}>
               {keys.map((key, index) => (
                 <li key={index} style={{ marginBottom: '8px', color: '#ffffff' }}>
-                  List key đã tạo:<br/>{key.key}
-                  <button
-                    onClick={() => navigator.clipboard.writeText(key.key)}
-                    style={{ marginLeft: '8px', background: '#ffffff', color: '#000000', border: '1px solid #ffffff', padding: '4px 8px', cursor: 'pointer' }}
-                  >
-                    Copy
-                  </button>
+                  {key.key}
                 </li>
               ))}
           </ul>

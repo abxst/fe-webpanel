@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Sidebar({ isOpen, onToggle }) {
+  const location = useLocation();
+
   return (
     <div
       className="sidebar"
@@ -26,13 +29,19 @@ export default function Sidebar({ isOpen, onToggle }) {
       </div>
       <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
         <li style={{ marginBottom: '8px' }}>
-          <button style={{ width: '100%', textAlign: 'left', padding: '8px 12px', background: '#000000', color: '#ffffff', border: '1px solid #ffffff', borderRadius: '4px', cursor: 'pointer' }}>Dashboard</button>
+          <Link to="/dashboard" style={{ display: 'block', padding: '8px 12px', background: location.pathname === '/dashboard' ? '#ffffff' : '#000000', color: location.pathname === '/dashboard' ? '#000000' : '#ffffff', border: '1px solid #ffffff', borderRadius: '4px', textDecoration: 'none', cursor: 'pointer' }}>
+            Dashboard
+          </Link>
         </li>
         <li style={{ marginBottom: '8px' }}>
-          <button style={{ width: '100%', textAlign: 'left', padding: '8px 12px', background: '#000000', color: '#ffffff', border: '1px solid #ffffff', borderRadius: '4px', cursor: 'pointer' }}>Add key</button>
+          <Link to="/add-key" style={{ display: 'block', padding: '8px 12px', background: location.pathname === '/add-key' ? '#ffffff' : '#000000', color: location.pathname === '/add-key' ? '#000000' : '#ffffff', border: '1px solid #ffffff', borderRadius: '4px', textDecoration: 'none', cursor: 'pointer' }}>
+            Add key
+          </Link>
         </li>
         <li style={{ marginBottom: '8px' }}>
-          <button style={{ width: '100%', textAlign: 'left', padding: '8px 12px', background: '#000000', color: '#ffffff', border: '1px solid #ffffff', borderRadius: '4px', cursor: 'pointer' }}>Delete key</button>
+          <Link to="/delete-key" style={{ display: 'block', padding: '8px 12px', background: location.pathname === '/delete-key' ? '#ffffff' : '#000000', color: location.pathname === '/delete-key' ? '#000000' : '#ffffff', border: '1px solid #ffffff', borderRadius: '4px', textDecoration: 'none', cursor: 'pointer' }}>
+            Delete key
+          </Link>
         </li>
       </ul>
     </div>
