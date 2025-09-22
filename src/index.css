@@ -16,8 +16,8 @@ code {
 
 /* Responsive styles for mobile */
 @media (max-width: 768px) {
-  .mobile-toggle {
-    display: block !important;
+  .toggle-btn {
+    display: block !important; /* Ensure visible on mobile */
   }
 
   .close-btn {
@@ -30,3 +30,5 @@ code {
     height: 100vh;
   }
 }
+
+/* No hiding of toggle button on desktop */
