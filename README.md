@@ -1,4 +1,4 @@
-# FE-WebPanel
+# FE-WebPanel-demo
 
 ## Mô tả dự án
 FE-WebPanel là một ứng dụng frontend được xây dựng bằng ReactJS, phục vụ như một bảng điều khiển web (web panel) cho hệ thống backend.
