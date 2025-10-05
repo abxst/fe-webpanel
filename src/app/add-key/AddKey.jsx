@@ -40,7 +40,7 @@ export default function AddKey() {
             min="1"
             required
             style={{ marginLeft: '8px', padding: '4px', border: '1px solid #ffffff', background: '#000000', color: '#ffffff' }}
-          />
+          /> keys
         </label>
         <label style={{ display: 'block', marginBottom: '16px', color: '#ffffff' }}>
           Thời gian:
