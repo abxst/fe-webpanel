@@ -57,7 +57,7 @@ export default function Login() {
               <input
                 type="text"
                 name="username"
-                placeholder="tên đăng nhập"
+                placeholder=""
                 required
                 className="input"
               />
@@ -69,7 +69,7 @@ export default function Login() {
                 <input
                   type={isPasswordVisible ? 'text' : 'password'}
                   name="password"
-                  placeholder="••••••••"
+                  placeholder=""
                   required
                   className="input password"
                 />
