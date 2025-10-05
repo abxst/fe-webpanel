@@ -51,7 +51,7 @@ export default function AddKey() {
             min="1"
             required
             style={{ marginLeft: '8px', padding: '4px', border: '1px solid #ffffff', background: '#000000', color: '#ffffff' }}
-          />
+          /> Days
         </label>
         <button
           type="submit"
