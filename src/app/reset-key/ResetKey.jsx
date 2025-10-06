@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Layout from '../layout/Layout';
 import { apiFetch } from '../../utils/api';
+import { logError, logInfo, logWarning } from '../../utils/errorHandler';
+
+const FILE_NAME = 'app/reset-key/ResetKey.jsx';
 
 export default function ResetKey() {
   const [key, setKey] = useState('');
@@ -8,20 +11,35 @@ export default function ResetKey() {
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setMessage('');
+    const FUNCTION_NAME = 'handleSubmit';
+    
     try {
+      event.preventDefault();
+      setLoading(true);
+      setMessage('');
+
+      logInfo('Attempting to reset key', FUNCTION_NAME, FILE_NAME, { key });
+
       const data = await apiFetch('/reset-key', {
         method: 'POST',
         body: JSON.stringify({ key }),
       });
+      
       if (data.status === 'ok') {
         setMessage('Key đã được reset thành công (id_device set to NULL).');
+        logInfo('Key reset successfully', FUNCTION_NAME, FILE_NAME, { key });
       } else {
         setMessage('Reset key thất bại.');
+        logWarning('Reset key failed - API returned non-ok status', FUNCTION_NAME, FILE_NAME, { 
+          key,
+          responseStatus: data.status,
+        });
       }
     } catch (error) {
+      logError(error, FUNCTION_NAME, FILE_NAME, {
+        errorType: 'Failed to reset key',
+        key,
+      });
       setMessage('Lỗi khi reset key.');
     } finally {
       setLoading(false);

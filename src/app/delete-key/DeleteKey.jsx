@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Layout from '../layout/Layout';
 import { apiFetch } from '../../utils/api';
+import { logError, logInfo, logWarning } from '../../utils/errorHandler';
+
+const FILE_NAME = 'app/delete-key/DeleteKey.jsx';
 
 export default function DeleteKey() {
   const [key, setKey] = useState('');
@@ -8,21 +11,35 @@ export default function DeleteKey() {
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setMessage('');
+    const FUNCTION_NAME = 'handleSubmit';
+    
     try {
-      //const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      event.preventDefault();
+      setLoading(true);
+      setMessage('');
+
+      logInfo('Attempting to delete key', FUNCTION_NAME, FILE_NAME, { key });
+
       const data = await apiFetch('/delete-key', {
         method: 'POST',
         body: JSON.stringify({ key }),
       });
+      
       if (data.status === 'ok') {
         setMessage('Key đã được xóa thành công.');
+        logInfo('Key deleted successfully', FUNCTION_NAME, FILE_NAME, { key });
       } else {
         setMessage('Xóa key thất bại.');
+        logWarning('Delete key failed - API returned non-ok status', FUNCTION_NAME, FILE_NAME, { 
+          key,
+          responseStatus: data.status,
+        });
       }
     } catch (error) {
+      logError(error, FUNCTION_NAME, FILE_NAME, {
+        errorType: 'Failed to delete key',
+        key,
+      });
       setMessage('Lỗi khi xóa key.');
     } finally {
       setLoading(false);

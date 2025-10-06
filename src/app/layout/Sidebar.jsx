@@ -1,17 +1,25 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../utils/api';
+import { logError, logInfo } from '../../utils/errorHandler';
+
+const FILE_NAME = 'app/layout/Sidebar.jsx';
 
 export default function Sidebar({ isOpen, onToggle }) {
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    const FUNCTION_NAME = 'handleLogout';
+    
     try {
-      //const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      logInfo('Attempting logout', FUNCTION_NAME, FILE_NAME);
       await apiFetch('/logout', { method: 'POST' });
+      logInfo('Logout successful', FUNCTION_NAME, FILE_NAME);
     } catch (error) {
-      console.error('Logout error:', error);
+      logError(error, FUNCTION_NAME, FILE_NAME, {
+        errorType: 'Logout request failed',
+      });
     } finally {
       navigate('/login');
     }

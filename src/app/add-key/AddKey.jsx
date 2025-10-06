@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Layout from '../layout/Layout';
 import { apiFetch } from '../../utils/api';
+import { logError, logInfo } from '../../utils/errorHandler';
+
+const FILE_NAME = 'app/add-key/AddKey.jsx';
 
 export default function AddKey() {
   const [amount, setAmount] = useState(1);
@@ -10,17 +13,38 @@ export default function AddKey() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
+    const FUNCTION_NAME = 'handleSubmit';
+    
     try {
-      //const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      event.preventDefault();
+      setLoading(true);
+      
+      const amountInt = parseInt(amount);
+      const lengthInt = parseInt(length);
+
+      logInfo('Attempting to add keys', FUNCTION_NAME, FILE_NAME, { 
+        amount: amountInt, 
+        length: lengthInt 
+      });
+
       const data = await apiFetch('/add-key', {
         method: 'POST',
-        body: JSON.stringify({ amount: parseInt(amount), length: parseInt(length) }),
+        body: JSON.stringify({ amount: amountInt, length: lengthInt }),
       });
+      
       setKeys(data.keys);
       setGenerated(data.generated);
+      
+      logInfo('Keys added successfully', FUNCTION_NAME, FILE_NAME, { 
+        generated: data.generated,
+        keysCount: data.keys?.length,
+      });
     } catch (error) {
+      logError(error, FUNCTION_NAME, FILE_NAME, {
+        errorType: 'Failed to add keys',
+        amount,
+        length,
+      });
       alert('Lỗi khi tạo key.');
     } finally {
       setLoading(false);

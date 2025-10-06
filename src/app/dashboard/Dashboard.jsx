@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../layout/Layout';
 import { apiFetch } from '../../utils/api';
+import { logError, logInfo } from '../../utils/errorHandler';
+
+const FILE_NAME = 'app/dashboard/Dashboard.jsx';
 
 export default function Dashboard() {
   const [keys, setKeys] = useState([]);
@@ -11,29 +14,52 @@ export default function Dashboard() {
 
   // Fetch user info on mount
   useEffect(() => {
-    apiFetch('/get-info', { method: 'GET' })
-      .then(data => {
+    const FUNCTION_NAME = 'useEffect[fetchUserInfo]';
+    
+    const fetchUserInfo = async () => {
+      try {
+        logInfo('Fetching user info', FUNCTION_NAME, FILE_NAME);
+        const data = await apiFetch('/get-info', { method: 'GET' });
         setUserInfo(data);
-      })
-      .catch(error => {
-        console.error('Error fetching user info:', error);
+        logInfo('User info fetched successfully', FUNCTION_NAME, FILE_NAME, { data });
+      } catch (error) {
+        logError(error, FUNCTION_NAME, FILE_NAME, {
+          errorType: 'Failed to fetch user info',
+        });
         alert('Lỗi khi tải thông tin người dùng.');
-      });
+      }
+    };
+
+    fetchUserInfo();
   }, []);
 
   // Existing fetch for keys
   useEffect(() => {
-    apiFetch(`/get-key?page=${page}&pageSize=${pageSize}`, { method: 'GET' })
-      .then(data => {
+    const FUNCTION_NAME = 'useEffect[fetchKeys]';
+    
+    const fetchKeys = async () => {
+      try {
+        logInfo('Fetching keys', FUNCTION_NAME, FILE_NAME, { page, pageSize });
+        const data = await apiFetch(`/get-key?page=${page}&pageSize=${pageSize}`, { method: 'GET' });
         setKeys(data.data);
         // Assuming API returns total count or pages; here we mock totalPages for demo
         // If API provides total, calculate: setTotalPages(Math.ceil(data.total / pageSize));
         setTotalPages(10); // Placeholder; replace with real logic
-      })
-      .catch(error => {
-        console.error('Error fetching keys:', error);
+        logInfo('Keys fetched successfully', FUNCTION_NAME, FILE_NAME, { 
+          keysCount: data.data?.length,
+          page,
+        });
+      } catch (error) {
+        logError(error, FUNCTION_NAME, FILE_NAME, {
+          errorType: 'Failed to fetch keys',
+          page,
+          pageSize,
+        });
         alert('Lỗi khi tải dữ liệu key.');
-      });
+      }
+    };
+
+    fetchKeys();
   }, [page, pageSize]);
 
   return (
